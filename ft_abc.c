@@ -6,13 +6,13 @@
 /*   By: equentin <equentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:48:04 by equentin          #+#    #+#             */
-/*   Updated: 2025/11/05 12:03:01 by equentin         ###   ########.fr       */
+/*   Updated: 2025/11/06 16:13:04 by equentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <limits.h>
 #include <stddef.h>
 #include <stdlib.h>
-#include <limits.h>
 
 static int	ft_isspace(char c)
 {
@@ -90,7 +90,7 @@ int	main(void)
 }
 */
 
-void *ft_calloc(size_t nmemb, size_t size)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
 	char	*array;
 	size_t	fsize;
@@ -104,7 +104,7 @@ void *ft_calloc(size_t nmemb, size_t size)
 		if (array == NULL)
 			return (NULL);
 		ft_bzero(array, fsize);
-		return array;
+		return (array);
 	}
 	else
 		return (NULL);
