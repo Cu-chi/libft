@@ -6,7 +6,7 @@
 /*   By: equentin <equentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 10:08:21 by equentin          #+#    #+#             */
-/*   Updated: 2025/11/06 15:32:54 by equentin         ###   ########.fr       */
+/*   Updated: 2025/11/06 16:04:15 by equentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,66 +82,45 @@ int	main(void)
 }
 */
 
-static size_t	ft_strtrim_count_size(char const *s1, char const *set)
-{
-	size_t	i;
-	size_t	fsize;
-	char	beginning;
-
-	beginning = 1;
-	i = 0;
-	while (s1[i])
-	{
-		if (ft_strchr(set, s1[i]) == NULL)
-		{
-			fsize++;
-			if (beginning == 1)
-				beginning = 0;
-		}
-		i++;
-	}
-	while (ft_strchr(set, s1[i--]) != NULL) // --i plutot
-		fsize--;
-	return (fsize);
-}
-
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t	fsize;
+	size_t	start;
+	size_t	end;
+	size_t	s1_len;
 	size_t	i;
 	char	*trim;
-	char	beginning;
-	int		last_index;
 
-	fsize = ft_strtrim_count_size(s1, set);
-	trim = (char *)malloc(sizeof(char) * (fsize + 1));
+	s1_len = ft_strlen(s1);
+	start = 0;
+	while (start < s1_len && ft_strchr(set, s1[start]) != NULL)
+		start++;
+	end = s1_len;
+	while (start < end && ft_strchr(set, s1[end]) != NULL)
+		end--;
+	end++;
+	trim = (char *)malloc(sizeof(char) * (end - start + 1));
 	if (trim == NULL)
 		return (NULL);
 	i = 0;
-	beginning = 1;
-	while (s1[i])
+	while (i < end - start)
 	{
-		if (ft_strchr(set, s1[i]) == NULL)
-			last_index = i;
-			beginning = 0;
+		trim[i] = s1[start + i];
 		i++;
 	}
-	i = 0;
-	while (ft_strchr(set, s1[i]) != NULL)
-		i++;
-	
+	trim[i] = '\0';
 	return (trim);
 }
-
+/*
 #include <stdio.h>
 
 int	main(void)
 {
-	const char	*s1 = "			trim 	this 	string			";
-	const char	*s2 = "\t ";
+	const char	*s1 = "	,a,b , cc,    	";
+	const char	*s2 = "\t ,";
 	char		*trim;
 
 	trim = ft_strtrim(s1, s2);
 	printf("RESULT : %s\n", trim);
 	free(trim);
 }
+*/
