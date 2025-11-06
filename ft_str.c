@@ -6,7 +6,7 @@
 /*   By: equentin <equentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 15:37:14 by equentin          #+#    #+#             */
-/*   Updated: 2025/11/05 13:38:39 by equentin         ###   ########.fr       */
+/*   Updated: 2025/11/06 11:42:05 by equentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	}
 	return (lenght_src + size);
 }
-
+/* TODO
 #include <stdio.h>
 #include <string.h>
 #include <bsd/string.h>
@@ -86,6 +86,7 @@ int	main(void)
 	printf("%zu\n", ft_strlcat(d5, s, 0));
 	printf("%zu\n", strlcat(d6, s, 0));
 }
+*/
 
 char	*ft_strchr(const char *s, int c)
 {
