@@ -6,7 +6,7 @@
 /*   By: equentin <equentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 15:13:57 by equentin          #+#    #+#             */
-/*   Updated: 2025/11/05 10:25:10 by equentin         ###   ########.fr       */
+/*   Updated: 2025/11/06 10:16:12 by equentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ char	*ft_strdup(const char *s)
 	while (s[lenght])
 		lenght++;
 	d = (char *)malloc(sizeof(char) * (lenght + 1));
+	if (d == NULL)
+		return (NULL);
 	i = 0;
 	while (i < lenght)
 	{
