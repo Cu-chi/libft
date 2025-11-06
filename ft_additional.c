@@ -6,7 +6,7 @@
 /*   By: equentin <equentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 10:08:21 by equentin          #+#    #+#             */
-/*   Updated: 2025/11/06 16:04:15 by equentin         ###   ########.fr       */
+/*   Updated: 2025/11/06 17:24:08 by equentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,3 +124,71 @@ int	main(void)
 	free(trim);
 }
 */
+
+static size_t	ft_split_nb_strs(char const *s, char c)
+{
+	size_t	nb_strs;
+	char	in_str;
+
+	nb_strs = 0;
+	in_str = 0;
+	while (*s)
+	{
+		if (*s != c)
+		{
+			if (in_str == 0)
+				nb_strs++;
+			in_str = 1;
+		}
+		else
+			in_str = 0;
+		s++;
+	}
+	return (nb_strs);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**strs;
+	size_t	nb_strs;
+	size_t	i;
+	size_t	start;
+	size_t	end;
+
+	nb_strs = ft_split_nb_strs(s, c);
+	strs = (char **)malloc(sizeof(char *) * (nb_strs + 1));
+
+	start = 0;
+	i = 0;
+	while (i < nb_strs)
+	{
+		while (s[start++] == c);
+		end = start;
+		while (s[end++] != c);
+		strs[i] = ft_substr(s, start - 1, end - start);
+		start = end;
+		i++;
+	}
+	strs[i] = NULL;
+	return (strs);
+}
+
+#include <stdio.h>
+
+int	main(void)
+{
+	const char	*s1 = "A, B,B,B E D DD Q     ";
+	char		s2;
+	char **s;
+
+	s2 = ' ';
+	int i = 0;
+	s = ft_split(s1, s2);
+	while (s[i] != NULL)
+	{
+
+		printf("%s %p\n", s[i], s[i]);
+		i++;
+	}
+		printf("%s %p\n", s[i], s[i]);
+}
