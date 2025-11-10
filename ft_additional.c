@@ -6,7 +6,7 @@
 /*   By: equentin <equentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 10:08:21 by equentin          #+#    #+#             */
-/*   Updated: 2025/11/07 13:47:31 by equentin         ###   ########.fr       */
+/*   Updated: 2025/11/10 14:32:35 by equentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,13 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char			*sub;
 
 	s_len = 0;
-	while (s[s_len++])
-		;
+	while (s[s_len])
+		s_len++;
 	if (start >= s_len)
 		return (ft_calloc(1, sizeof(char)));
 	count = 0;
-	while (s[start + count] && count++ < len);
+	while (s[start + count] && count < len)
+		count++;
 	sub = (char *)malloc(sizeof(char) * (count + 1));
 	if (sub == NULL)
 		return (NULL);
@@ -45,14 +46,14 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 int	main(void)
 {
-	const char	*s = "search the substring and dup";
+	const char	*s = "hola";
 	char		*sub;
 
-	sub = ft_substr(s, 110, 9);
-	printf("RESULT : %s (ptr = %p)", sub, &sub);
+	sub = ft_substr(s, 0, 0);
+	printf("RESULT : '%s' (ptr = %p)", sub, &sub);
 	free(sub);
 }
-*/
+	*/
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -90,18 +91,17 @@ char	*ft_strtrim(char const *s1, char const *set)
 {
 	size_t	start;
 	size_t	end;
-	size_t	s1_len;
 	size_t	i;
 	char	*trim;
 
-	s1_len = ft_strlen(s1);
 	start = 0;
-	while (start < s1_len && ft_strchr(set, s1[start]) != NULL)
+	end = ft_strlen(s1);
+	while (start < end && ft_strchr(set, s1[start]) != NULL)
 		start++;
-	end = s1_len;
 	while (start < end && ft_strchr(set, s1[end]) != NULL)
 		end--;
-	end++;
+	if (end != ft_strlen(s1))
+		end++;
 	trim = (char *)malloc(sizeof(char) * (end - start + 1));
 	if (trim == NULL)
 		return (NULL);
@@ -119,86 +119,65 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 int	main(void)
 {
-	const char	*s1 = "	,a,b , cc,    	";
-	const char	*s2 = "\t ,";
+	const char	*s1 = "";
+	const char	*s2 = "";
 	char		*trim;
 
 	trim = ft_strtrim(s1, s2);
-	printf("RESULT : %s\n", trim);
+	printf("RESULT : '%s'\n", trim);
 	free(trim);
 }
 */
 
-static size_t	ft_split_nb_strs(char const *s, char c)
+static int	ft_itoa_size(int n)
 {
-	size_t	nb_strs;
-	char	in_str;
+	int	size;
 
-	nb_strs = 0;
-	in_str = 0;
-	while (*s)
+	size = 1;
+	if (n < 0)
+		size++;
+	while (n >= 10 || n <= -10)
 	{
-		if (*s != c)
-		{
-			if (in_str == 0)
-				nb_strs++;
-			in_str = 1;
-		}
-		else
-			in_str = 0;
-		s++;
+		n /= 10;
+		size++;
 	}
-	return (nb_strs);
+	return (size);
 }
 
-char	**ft_split(char const *s, char c)
+char	*ft_itoa(int n)
 {
-	char	**strs;
-	size_t	nb_strs;
-	size_t	i;
-	size_t	start;
-	size_t	end;
+	char			*a;
+	int				size;
+	unsigned int	nb;
 
-	nb_strs = ft_split_nb_strs(s, c);
-	strs = (char **)malloc(sizeof(char *) * (nb_strs + 1));
-	if (strs == NULL)
+	size = ft_itoa_size(n);
+	a = (char *)ft_calloc(size + 1, sizeof(char));
+	if (a == NULL)
 		return (NULL);
-	start = 0;
-	i = 0;
-	while (i < nb_strs)
+	if (n < 0)
 	{
-		while (s[start++] == c)
-			;
-		end = start;
-		while (s[end++] != c)
-			;
-		strs[i] = ft_substr(s, start - 1, end - start);
-		if (strs[i] == NULL)
-			return (NULL);
-		start = end;
-		i++;
+		a[0] = '-';
+		nb = -n;
 	}
-	strs[i] = NULL;
-	return (strs);
+	else
+		nb = n;
+	while ((n < 0 && size > 1) || (n >= 0 && size > 0))
+	{
+		size--;
+		a[size] = nb % 10 + '0';
+		nb /= 10;
+	}
+	return (a);
 }
 /*
 #include <stdio.h>
 
 int	main(void)
 {
-	const char	*s1 = "A, B,B,B E D DD Q     ";
-	char		s2;
-	char		**s;
-	int			i;
+	char	*trim;
 
-	s2 = ' ';
-	i = 0;
-	s = ft_split(s1, s2);
-	while (s[i] != NULL)
-	{
-		printf("%s %p\n", s[i], s[i]);
-		i++;
-	}
-		printf("%s %p\n", s[i], s[i]);
+	trim = ft_itoa(-2147483648);
+	printf("RESULT : '%s'\n", trim);
+	free(trim);
 }
 */

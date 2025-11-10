@@ -6,7 +6,7 @@
 /*   By: equentin <equentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:48:04 by equentin          #+#    #+#             */
-/*   Updated: 2025/11/06 16:13:04 by equentin         ###   ########.fr       */
+/*   Updated: 2025/11/10 14:02:17 by equentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,5 @@ void	*ft_calloc(size_t nmemb, size_t size)
 		ft_bzero(array, fsize);
 		return (array);
 	}
-	else
-		return (NULL);
+	return (NULL);
 }

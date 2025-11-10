@@ -6,7 +6,7 @@
 /*   By: equentin <equentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 14:00:11 by equentin          #+#    #+#             */
-/*   Updated: 2025/11/05 10:20:34 by equentin         ###   ########.fr       */
+/*   Updated: 2025/11/10 13:37:47 by equentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,16 @@
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
+	size_t	i;
+
+	i = 0;
+	if (dest == NULL && src == NULL)
+		return (dest);
 	while (n-- > 0)
-		*(char *)dest++ = *(char *)src++;
+	{
+		((char *)dest)[i] = ((char *)src)[i];
+		i++;
+	}
 	return (dest);
 }
 /*
@@ -28,17 +36,17 @@ int	main(void)
 	char	*b;
 	char	*c;
 
-	a = "test copie!";
+	a = NULL;
 	c = malloc(sizeof(char) * 12);
 	c[0] = '\0';
 	b = malloc(sizeof(char) * 12);
 	b[0] = '\0';
-	printf("-> %s\n", c);
-	memcpy(c, a, 12);
-	printf("%s\n", c);
-	printf("-> %s\n", b);
-	ft_memcpy(b, a, 12);
-	printf("%s\n", b);
+	//printf("-> %s\n", c);
+	memcpy(((void*)0), ((void*)0), 3);
+	//printf("%s\n", c);
+	//printf("-> %s\n", b);
+	ft_memcpy(((void*)0), ((void*)0), 3);
+	//printf("%s\n", b);
 	free(c);
 	free(b);
 	return (0);
@@ -85,26 +93,26 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	_s = (unsigned char *)s;
 	while (i < n)
 	{
-		if (_s[i] == c)
+		if (_s[i] == (unsigned char)c)
 			return ((void *)&s[i]);
 		i++;
 	}
 	return (NULL);
 }
-
 /*
 #include <stdio.h>
 #include <string.h>
 int	main(void)
 {
 	const char	*str = "ab\0bbcdef";
+	int			tab[7] = {-49, 49, 1, -1, 0, -2, 2};
 
-	printf("%p\n", ft_memchr((const void *)str, 'b', 10));
-	printf("%p\n", memchr((const void *)str, 'b', 10));
-	printf("%p\n", ft_memchr((const void *)str, '\0', 10));
-	printf("%p\n", memchr((const void *)str, '\0', 10));
-	printf("%p\n", ft_memchr((const void *)str, 'e', 10));
-	printf("%p\n", memchr((const void *)str, 'e', 10));
+	printf("%p\n", ft_memchr((const void *)tab, -1, 7));
+	printf("%p\n", memchr((const void *)tab, -1, 7));
+	// printf("%p\n", ft_memchr((const void *)str, '\0', 10));
+	// printf("%p\n", memchr((const void *)str, '\0', 10));
+	// printf("%p\n", ft_memchr((const void *)str, 'e', 10));
+	// printf("%p\n", memchr((const void *)str, 'e', 10));
 }
 */
 

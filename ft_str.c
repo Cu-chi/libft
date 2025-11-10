@@ -6,7 +6,7 @@
 /*   By: equentin <equentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 15:37:14 by equentin          #+#    #+#             */
-/*   Updated: 2025/11/06 11:42:05 by equentin         ###   ########.fr       */
+/*   Updated: 2025/11/10 10:23:29 by equentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,22 @@ size_t	ft_strlen(const char *s)
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t	i;
+	size_t	tsrc;
 
+	tsrc = 0;
+	while (src[tsrc])
+		tsrc++;
+	if (size == 0)
+		return (tsrc);
 	i = 0;
 	while (src[i] && i < size - 1)
 	{
-		dst[i] = src[i];
+		dst[i] = ((char *)src)[i];
 		i++;
 	}
-	dst[i] = '\0';
-	return (i);
+	if (size > 0)
+		dst[i] = '\0';
+	return (tsrc);
 }
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
@@ -92,11 +99,11 @@ char	*ft_strchr(const char *s, int c)
 {
 	while (*s)
 	{
-		if (*s == c)
+		if (*s == (char)c)
 			return ((char *)s);
 		s++;
 	}
-	if (*s == c)
+	if (*s == (char)c)
 		return ((char *)s);
 	return (NULL);
 }
@@ -108,11 +115,11 @@ char	*ft_strrchr(const char *s, int c)
 	last = NULL;
 	while (*s)
 	{
-		if (*s == c)
+		if (*s == (char)c)
 			last = (char *)s;
 		s++;
 	}
-	if (*s == c)
+	if (*s == (char)c)
 		return ((char *)s);
 	return (last);
 }

@@ -6,7 +6,7 @@
 /*   By: equentin <equentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 15:13:57 by equentin          #+#    #+#             */
-/*   Updated: 2025/11/06 10:16:12 by equentin         ###   ########.fr       */
+/*   Updated: 2025/11/10 13:10:39 by equentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,40 +31,39 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	size_t	i;
 	size_t	j;
-	size_t	little_lenght;
 
-	little_lenght = 0;
-	while (little[little_lenght])
-		little_lenght++;
-	if (little_lenght == 0)
-		return ((char *)big);
 	i = 0;
-	while (i <= len && big[i])
+	j = 0;
+	if (!little[j])
+		return ((char *)big);
+	while (big[i] && i < len)
 	{
-		j = 0;
-		while (big[i] == little[j] && i <= len)
+		if (big[i] == little[j])
 		{
-			if (big[i] == '\0')
-				return ((char *)(big + i - j));
 			j++;
-			i++;
+			if (little[j] == '\0')
+				return ((char *)big + i - j + 1);
 		}
-		i -= j;
+		else
+		{
+			if (j > 0)
+				i -= j;
+			j = 0;
+		}
 		i++;
 	}
-	return (NULL);
+	return (0);
 }
-
 /*
 #include <bsd/string.h>
 #include <stdio.h>
 int	main(void)
 {
-	const char	*big = "h";
-	const char	*little = "h";
+	const char	*big = "aaabcabcd";
+	const char	*little = "aabc";
 
-	printf("%s\n", ft_strnstr(big, little, 1));
-	printf("%s", strnstr(big, little, 1));
+	printf("'%s'\n", ft_strnstr(big, little, -1));
+	printf("'%s'", strnstr(big, little, -1));
 	return (0);
 }
 */
@@ -77,7 +76,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	while ((s1[i] || s2[i]) && i < n)
 	{
 		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 		i++;
 	}
 	return (0);
@@ -88,11 +87,11 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 #include <stdio.h>
 int	main(void)
 {
-	const char	*big = "helloo";
-	const char	*little = "hello";
+	const char	*big = "test\200";
+	const char	*little = "test\0";
 
-	printf("%d\n", ft_strncmp(big, little, 5));
-	printf("%d", strncmp(big, little, 5));
+	printf("%d\n", ft_strncmp(big, little, 6));
+	printf("%d", strncmp(big, little, 6));
 	return (0);
 }
 */

@@ -6,9 +6,14 @@ NAME = libft.a
 SRC_DIR = .
 SRC_FIL = ft_abc.c \
 	ft_additional.c \
+	ft_additional2.c \
+	ft_fd.c \
 	ft_is.c \
 	ft_mem.c \
+	ft_split.c \
 	ft_str.c \
+	ft_bonus.c \
+	ft_bonus2.c \
 	ft_str2.c
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FIL))
 
@@ -30,4 +35,6 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+bonus: 
+
+.PHONY: all clean fclean re bonus
