@@ -6,7 +6,7 @@
 /*   By: equentin <equentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 15:16:17 by equentin          #+#    #+#             */
-/*   Updated: 2025/11/10 16:32:05 by equentin         ###   ########.fr       */
+/*   Updated: 2025/11/11 07:59:53 by equentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,8 @@ int	ft_lstsize(t_list *lst)
 {
 	int	size;
 
-	if (lst == NULL)
-		return (0);
-	size = 1;
-	while (lst->next != NULL)
+	size = 0;
+	while (lst)
 	{
 		lst = lst->next;
 		size++;

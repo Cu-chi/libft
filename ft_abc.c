@@ -6,7 +6,7 @@
 /*   By: equentin <equentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:48:04 by equentin          #+#    #+#             */
-/*   Updated: 2025/11/10 14:02:17 by equentin         ###   ########.fr       */
+/*   Updated: 2025/11/11 07:55:28 by equentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static int	ft_isspace(char c)
 
 int	ft_atoi(const char *nptr)
 {
-	int	i;
-	int	n;
-	int	m;
+	int					i;
+	unsigned long long	n;
+	int					m;
 
 	i = 0;
 	n = 0;
@@ -42,6 +42,10 @@ int	ft_atoi(const char *nptr)
 	{
 		n = n * 10 + nptr[i] - '0';
 		i++;
+		if (n > LONG_MAX && m == -1)
+			return (0);
+		else if (n >= LONG_MAX && m == 1)
+			return (-1);
 	}
 	return (n * m);
 }
@@ -51,18 +55,22 @@ int	ft_atoi(const char *nptr)
 
 int	main(void)
 {
-	printf("%d\n", atoi(" - 011"));
-	printf("%d\n", ft_atoi(" - 011"));
-	printf("%d\n", atoi(" -011"));
-	printf("%d\n", ft_atoi(" -011"));
-	printf("%d\n", atoi("    -01 1"));
-	printf("%d\n", ft_atoi("    -01 1"));
-	printf("%d\n", atoi(" +011"));
-	printf("%d\n", ft_atoi(" +011"));
-	printf("%d\n", atoi("			-018981"));
-	printf("%d\n", ft_atoi("			-018981"));
-	printf("%d\n", atoi("+01 1"));
-	printf("%d\n", ft_atoi("+01 1"));
+	// printf("%d\n", atoi("    - 011"));
+	// printf("%d\n", ft_atoi(" - 011"));
+	// printf("%d\n", atoi("    -011"));
+	// printf("%d\n", ft_atoi(" -011"));
+	// printf("%d\n", atoi("       -01 1"));
+	// printf("%d\n", ft_atoi("    -01 1"));
+	// printf("%d\n", atoi("    +011"));
+	// printf("%d\n", ft_atoi(" +011"));
+	// printf("%d\n", atoi("				 -018981"));
+	// printf("%d\n", ft_atoi("			-018981"));
+	// printf("%d\n", atoi("   +01 1"));
+	// printf("%d\n", ft_atoi("+01 1"));
+	printf("%d\n", atoi("   -9223392036854976810"));
+	printf("%d\n", ft_atoi("-9223392036854976810"));
+	// printf("%d\n", atoi("         -9223372036854775876"));
+	// printf("%d\n", ft_atoi("      -9223372036854775876"));
 }
 */
 
