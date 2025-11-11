@@ -1,9 +1,7 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-INCLUDES = includes
 NAME = libft.a
 
-SRC_DIR = .
 SRC_FIL = ft_abc.c \
 	ft_additional.c \
 	ft_additional2.c \
@@ -12,29 +10,30 @@ SRC_FIL = ft_abc.c \
 	ft_mem.c \
 	ft_split.c \
 	ft_str.c \
-	ft_bonus.c \
-	ft_bonus2.c \
 	ft_str2.c
-SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FIL))
+BONUS_FIL = ft_bonus.c ft_bonus2.c
 
-OBJS = $(SRCS:.c=.o)
+OBJS = $(SRC_FIL:.c=.o)
+BONUS_OBJS = $(BONUS_FIL:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	ar -rcs $@ $^
 
+bonus: $(NAME) $(BONUS_OBJS)
+	ar -rcs $(NAME) $(BONUS_OBJS)
+
 .c.o:
-	$(CC) $(CFLAGS) -I$(INCLUDES) -c $^ -o $@
+	$(CC) $(CFLAGS) -c $^ -o $@
 
 clean:
 	rm -f $(OBJS)
+	rm -f $(BONUS_OBJS)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
-bonus: 
 
 .PHONY: all clean fclean re bonus

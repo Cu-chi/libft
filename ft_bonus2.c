@@ -6,7 +6,7 @@
 /*   By: equentin <equentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 15:16:17 by equentin          #+#    #+#             */
-/*   Updated: 2025/11/11 08:50:22 by equentin         ###   ########.fr       */
+/*   Updated: 2025/11/11 08:57:11 by equentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ int	main(void)
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	if (lst == NULL)
-		return ;
 	while (lst)
 	{
 		f(lst->content);
