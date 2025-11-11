@@ -6,7 +6,7 @@
 /*   By: equentin <equentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 15:16:17 by equentin          #+#    #+#             */
-/*   Updated: 2025/11/11 08:57:11 by equentin         ###   ########.fr       */
+/*   Updated: 2025/11/11 10:18:46 by equentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,29 @@ void	ft_lstiter(t_list *lst, void (*f)(void *))
 		lst = lst->next;
 	}
 }
+/*
+#include <stdio.h>
+static void	test(void *a)
+{
+	printf("contenu %s\n", (char *)a);
+}
+
+int	main(void)
+{
+	t_list	*nl;
+	char	*a;
+	char	*b;
+	char	*c;
+	char	*d;
+
+	nl = ft_lstnew("test");
+	ft_lstadd_front(&nl, ft_lstnew("new"));
+	ft_lstadd_front(&nl, ft_lstnew("new2"));
+	ft_lstadd_front(&nl, ft_lstnew("new3"));
+	ft_lstiter(nl, &test);
+	return (0);
+}
+*/
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
@@ -93,3 +116,49 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	}
 	return (new_lst);
 }
+
+/*
+#include <stdio.h>
+
+static void	*testf(void *a)
+{
+	char	*new;
+
+	new = malloc(sizeof(char) * 3);
+	if (new == NULL)
+		return (NULL);
+	new = "42";
+	return (new);
+}
+
+static void	testprint(void *a)
+{
+	printf("contenu %s\n", (char *)a);
+}
+
+static void	testdel(void *a)
+{
+	free(a);
+}
+
+int	main(void)
+{
+	t_list	*nl;
+	t_list	*new;
+	char	*a;
+	char	*b;
+	char	*c;
+	char	*d;
+
+	nl = ft_lstnew("test");
+	ft_lstadd_front(&nl, ft_lstnew("new"));
+	ft_lstadd_front(&nl, ft_lstnew("new2"));
+	ft_lstadd_front(&nl, ft_lstnew("new3"));
+	new = ft_lstmap(nl, &testf, &testdel);
+	ft_lstiter(new, &testprint);
+	if (new != NULL)
+		ft_lstclear(&new, &testdel);
+	ft_lstclear(&nl, &testdel);
+	return (0);
+}
+*/
