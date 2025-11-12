@@ -6,7 +6,7 @@
 /*   By: equentin <equentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 15:16:17 by equentin          #+#    #+#             */
-/*   Updated: 2025/11/11 10:18:46 by equentin         ###   ########.fr       */
+/*   Updated: 2025/11/12 11:31:19 by equentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 
 void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	del(lst->content);
+	if (del)
+		del(lst->content);
+	else
+		free(lst->content);
 	free(lst);
 }
 
@@ -59,6 +62,8 @@ int	main(void)
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
+	if (!f)
+		return ;
 	while (lst)
 	{
 		f(lst->content);
@@ -89,28 +94,32 @@ int	main(void)
 }
 */
 
+void	*ft_lstmap_clear(t_list **new_lst, void *created_content,
+		void (*del)(void *))
+{
+	if (created_content)
+		del(created_content);
+	ft_lstclear(new_lst, del);
+	return (NULL);
+}
+
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	*new_lst;
 	t_list	*created_node;
 	void	*created_content;
 
+	if (!f || !del)
+		return (NULL);
 	new_lst = NULL;
 	while (lst)
 	{
 		created_content = f(lst->content);
 		if (created_content == NULL)
-		{
-			ft_lstclear(&new_lst, del);
-			return (NULL);
-		}
+			return (ft_lstmap_clear(&new_lst, NULL, del));
 		created_node = ft_lstnew(created_content);
 		if (created_node == NULL)
-		{
-			del(created_content);
-			ft_lstclear(&new_lst, del);
-			return (NULL);
-		}
+			return (ft_lstmap_clear(&new_lst, created_content, del));
 		ft_lstadd_back(&new_lst, created_node);
 		lst = lst->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: equentin <equentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 10:08:21 by equentin          #+#    #+#             */
-/*   Updated: 2025/11/10 14:42:03 by equentin         ###   ########.fr       */
+/*   Updated: 2025/11/12 11:09:22 by equentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	char	*new;
 	int		i;
 
+	if (!f)
+		return (NULL);
 	i = 0;
 	new = ft_strdup(s);
 	if (new == NULL)
@@ -35,6 +37,8 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
 	int		i;
 
+	if (!f)
+		return ;
 	i = 0;
 	while (s[i])
 	{

@@ -11,9 +11,9 @@ SRC_FIL = ft_abc.c \
 	ft_split.c \
 	ft_str.c \
 	ft_str2.c
-BONUS_FIL = ft_bonus.c ft_bonus2.c
-
 OBJS = $(SRC_FIL:.c=.o)
+
+BONUS_FIL = ft_bonus.c ft_2_bonus.c
 BONUS_OBJS = $(BONUS_FIL:.c=.o)
 
 all: $(NAME)
@@ -21,8 +21,11 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	ar -rcs $@ $^
 
-bonus: $(NAME) $(BONUS_OBJS)
+bonus: .bonus
+
+.bonus: $(NAME) $(BONUS_OBJS)
 	ar -rcs $(NAME) $(BONUS_OBJS)
+	touch .bonus
 
 .c.o:
 	$(CC) $(CFLAGS) -c $^ -o $@
@@ -30,6 +33,7 @@ bonus: $(NAME) $(BONUS_OBJS)
 clean:
 	rm -f $(OBJS)
 	rm -f $(BONUS_OBJS)
+	rm -f .bonus
 
 fclean: clean
 	rm -f $(NAME)
