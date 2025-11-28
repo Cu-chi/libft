@@ -1,12 +1,12 @@
 # Libft
-Implémentation personnelle de fonctions standards C. Premier projet du cursus 42.
+Custom implementation of standard C library functions. First project of the 42 curriculum.
 
-#### 🎯 Concepts Clés
- - Gestion Mémoire : Allocation dynamique (malloc, free) et prévention des fuites.
- - Pointeurs : Arithmétique de pointeurs, pointeurs de fonctions et manipulation de void *.
- - Algorithmes : Traitement de chaînes de caractères et de blocs mémoire.
- - Structures : Introduction aux listes chaînées (Linked Lists).
- - Build : Création d'un Makefile et compilation de bibliothèque statique (libft.a).
+#### 🎯 Key Concepts
+ - Memory Management: Dynamic allocation (malloc, free) and leak prevention.
+ - Pointers: Pointer arithmetic, function pointers, and void * manipulation.
+ - Algorithms: String processing and memory block manipulation.
+ - Structures: Introduction to Linked Lists.
+ - Build: Makefile creation and static library compilation (libft.a).
 
-#### ⚠️ Disclaimer 42
-Ce dépôt est rendu public pour présenter mon code et servir de ressource pédagogique ; le plagiat est strictement interdit et vous devez être capable d'expliquer votre propre travail.
+#### ⚠️ 42 Disclaimer
+This repository is made public to showcase my code and serve as an educational resource; plagiarism is strictly forbidden, and you must be able to explain your own work.
